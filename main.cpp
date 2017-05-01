@@ -25,6 +25,20 @@ void insertionSort(T arr[], int n){
     }
 }
 
+template<typename T>
+void insertionSort2(T arr[], int n){
+    for (int i = 0; i < n; ++i) {
+        T temp = arr[i];
+        for (int j = i+1; j > 0; --j) {
+            if (arr[j]<arr[j-1]) arr[j] = arr[j-1];
+            else {
+                arr[j] = temp;
+                break;
+            }
+        }
+    }
+}
+
 void testTemplateSort(){
     Student s[4] = {{"D",90},{"C",100},{"B",95},{"A",92}};
     selectionSort(s, 4);
@@ -34,7 +48,7 @@ void testTemplateSort(){
 void testCopySort(int arr[], int n){
     int* arr2 = SortHelper::copyArray(arr,n);
     SortHelper::testSort("Selection", selectionSort, arr, n);
-    SortHelper::testSort("Insertion", insertionSort, arr2, n);
+    SortHelper::testSort("Insertion", insertionSort2, arr2, n);
     delete[] arr2;
 }
 
