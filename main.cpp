@@ -58,7 +58,7 @@ template<typename T>
 void shellSort(T arr[], int n){
     for (int gap = n / 2; gap > 0; gap /= 2)
         for (int i = gap; i < n; i++) {
-            for (int j = i - gap; j >= 0; j -= gap) {
+            for (int j = i - gap; j > 0; j -= gap) {
                 if (arr[j + gap] < arr[j]) arr[j + gap] =arr[j] ;
                 else {
                     arr[j] = arr[i];
@@ -74,10 +74,9 @@ void testTemplateSort(){
     SortHelper::printArray(s, 4);
 }
 
-
 int main() {
 //    testTemplateSort();
-    int n = 100000;
+    int n = 10000;
     int *arr = SortHelper::generateRamdomArray(n,0,n);
 //    selectionSort(arr, n);
 //    SortHelper::printArray(arr, n);
@@ -85,7 +84,7 @@ int main() {
 //    SortHelper::testSort("Selection", selectionSort, arr, n);
 //    SortHelper::testSort("Insertion", insertionSort, arr, n);
 //    SortHelper::testSort("Insertion", insertionSort2, arr, n);
-    SortHelper::testSort("Shell", shellSort, arr, n);
+    SortHelper::compareSort("Insertion", insertionSort2, "Shell", shellSort, arr, n);
     delete[] arr;
     return 0;
 }

@@ -57,6 +57,14 @@ namespace SortHelper{
         return arr;
     }
 
+    template<typename T>
+    void compareSort(string name1, void(*sort1)(T[],int), string name2, void(*sort2)(T[],int), T arr[], int n){
+        T *arr2 = SortHelper::copyArray(arr, n);
+        SortHelper::testSort(name1, sort1, arr, n);
+        SortHelper::testSort(name2, sort2, arr2, n);
+        delete[] arr2;
+    }
+
 }
 
 #endif //ALGORITHM_SORTHELPER_H
