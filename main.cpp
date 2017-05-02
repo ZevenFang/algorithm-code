@@ -28,11 +28,10 @@ void insertionSort(T arr[], int n){
 template<typename T>
 void insertionSort2(T arr[], int n){
     for (int i = 0; i < n; ++i) {
-        T temp = arr[i];
         for (int j = i+1; j > 0; --j) {
             if (arr[j]<arr[j-1]) arr[j] = arr[j-1];
             else {
-                arr[j] = temp;
+                arr[j] = arr[i];
                 break;
             }
         }
@@ -60,7 +59,8 @@ int main() {
 //    SortHelper::printArray(arr, n);
 //    SortHelper::testSort("Selection", selectionSort, arr, n);
 //    SortHelper::testSort("Insertion", insertionSort, arr, n);
-    testCopySort(arr, n);
+//    SortHelper::testSort("Insertion", insertionSort2, arr, n);
+//    testCopySort(arr, n);
     delete[] arr;
     return 0;
 }
