@@ -47,6 +47,19 @@ void insertionSort2(T arr[], int n){
     }
 }
 
+template<typename T>
+void insertionSort2(T arr[], int l, int r){
+    for (int i = l; i <= r; ++i) {
+        for (int j = i+1; j > l; --j) {
+            if (arr[j]<arr[j-1]) arr[j] = arr[j-1];
+            else {
+                arr[j] = arr[i];
+                break;
+            }
+        }
+    }
+}
+
 /*
  * 希尔排序时效分析很难，关键码的比较次数与记录移动次数依赖于步长因子序列的选取，
  * 特定情况下可以准确估算出关键码的比较次数和记录的移动次数。目前还没有人给出选取
@@ -101,11 +114,16 @@ void __merge(T arr[], int l, int r){
 // 递归使用归并排序，对arr[l...r]的范围进行排序
 template<typename T>
 void __mergeSort(T arr[], int l, int r){
-    if (l >= r) return;
+//    if (l >= r) return;
+    if (r-l <= 15) { // 在元素较少的情况下使用插入排序
+        insertionSort2(arr, l, r);
+        return;
+    }
     int mid = (l+r)/2;
     __mergeSort(arr, l, mid);
     __mergeSort(arr, mid+1, r);
-    __merge(arr, l, r);
+    if (arr[mid] > arr[mid+1]) // 在近乎有序的数组效果更加明显
+        __merge(arr, l, r);
 }
 
 template<typename T>
@@ -124,7 +142,7 @@ int main() {
 //    SortHelper::testSort("Insertion", insertionSort, arr, n);
 //    SortHelper::testSort("Insertion", insertionSort2, arr, n);
 //    SortHelper::testSort("Merge", mergeSort, arr, n);
-//    SortHelper::compareSort("Insertion", insertionSort2, "Merge", mergeSort, arr, n);
+    SortHelper::compareSort("Insertion", insertionSort2, "Merge", mergeSort, arr, n);
     delete[] arr;
     return 0;
 }
