@@ -14,12 +14,11 @@ using namespace std;
 namespace SortHelper{
 
     int* generateRamdomArray(int n, int rangeL, int rangeR){
-
         assert(rangeL<rangeR);
-        int *arr = new int[n];
-        srand(time(NULL));
+        auto *arr = new int[n];
+        srand((unsigned int) time(nullptr));
         for(int i=0;i<n;i++)
-            arr[i] = rand()%(rangeR-rangeL+1) + rangeL;
+            arr[i] = (int) (random() % (rangeR - rangeL + 1) + rangeL);
         return arr;
     }
 
@@ -50,7 +49,7 @@ namespace SortHelper{
 
     template<typename T>
     T* copyArray(T a[], int n){
-        auto* arr = new T[n];
+        auto* arr = new T[n-1];
         for (int i = 0; i < n; ++i) {
             arr[i] = a[i];
         }

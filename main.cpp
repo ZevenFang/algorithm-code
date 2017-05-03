@@ -74,9 +74,48 @@ void testTemplateSort(){
     SortHelper::printArray(s, 4);
 }
 
+// 将arr[l...r]分成两部分进行归并
+template<typename T>
+void __merge(T arr[], int l, int r){
+    int mid = (l+r)/2;
+    T *temp = new T[r-l+1];
+    for (int i = l; i <= r; ++i)
+        temp[i-l] = arr[i];
+    for (int i = l, j = mid+1, k = l; k <= r; ++k) {
+        if (i > mid) {
+            arr[k] = temp[j-l];
+            j++;
+        } else if (j > r) {
+            arr[k] = temp[i-l];
+            i++;
+        } else if (temp[i-l] < temp[j-l]) {
+            arr[k] = temp[i-l];
+            i++;
+        } else {
+            arr[k] = temp[j-l];
+            j++;
+        }
+    }
+}
+
+// 递归使用归并排序，对arr[l...r]的范围进行排序
+template<typename T>
+void __mergeSort(T arr[], int l, int r){
+    if (l >= r) return;
+    int mid = (l+r)/2;
+    __mergeSort(arr, l, mid);
+    __mergeSort(arr, mid+1, r);
+    __merge(arr, l, r);
+}
+
+template<typename T>
+void mergeSort(T arr[], int n){
+    __mergeSort(arr, 0, n-1);
+}
+
 int main() {
 //    testTemplateSort();
-    int n = 10000;
+    int n = 1000000;
     int *arr = SortHelper::generateRamdomArray(n,0,n);
 //    selectionSort(arr, n);
 //    SortHelper::printArray(arr, n);
@@ -84,7 +123,8 @@ int main() {
 //    SortHelper::testSort("Selection", selectionSort, arr, n);
 //    SortHelper::testSort("Insertion", insertionSort, arr, n);
 //    SortHelper::testSort("Insertion", insertionSort2, arr, n);
-    SortHelper::compareSort("Insertion", insertionSort2, "Shell", shellSort, arr, n);
+//    SortHelper::testSort("Merge", mergeSort, arr, n);
+//    SortHelper::compareSort("Insertion", insertionSort2, "Merge", mergeSort, arr, n);
     delete[] arr;
     return 0;
 }
