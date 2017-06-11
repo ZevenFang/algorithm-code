@@ -3,5 +3,5 @@ project(algorithm)
 
 set(CMAKE_CXX_STANDARD 11)
 
-set(SOURCE_FILES main.cpp SortHelper.h Student.h)
+set(SOURCE_FILES sort/main.cpp sort/SortHelper.h sort/Student.h sort/MergeSort.h sort/InsertionSort.h sort/SelectionSort.h sort/BubbleSort.h)
 add_executable(algorithm ${SOURCE_FILES})
