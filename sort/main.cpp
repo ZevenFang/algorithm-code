@@ -4,6 +4,7 @@
 #include "BubbleSort.h"
 #include "InsertionSort.h"
 #include "MergeSort.h"
+#include "QuickSort.h"
 
 int main() {
 //    testTemplateSort();
@@ -16,8 +17,8 @@ int main() {
 //    SortHelper::testSort("Insertion", insertionSort, arr, n);
 //    SortHelper::testSort("Insertion", insertionSort2, arr, n);
 //    SortHelper::testSort("Merge", mergeSort, arr, n);
-    SortHelper::testSort("Merge2", mergeSort2, arr, n);
-//    SortHelper::compareSort("Insertion", insertionSort2, "Merge", mergeSort, arr, n);
+//    SortHelper::testSort("Merge2", mergeSort2, arr, n);
+    SortHelper::compareSort("Merge", mergeSort, "Quick3", quickSort3, arr, n);
     delete[] arr;
     return 0;
 }
